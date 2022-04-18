@@ -1,0 +1,34 @@
+{
+  "name": "@thrivecoin/grc-client-cli",
+  "version": "1.0.0",
+  "description": "Grenache cli client",
+  "main": "index.js",
+  "scripts": {
+    "lint": "standard",
+    "format": "standard --fix",
+    "test": "npm run lint"
+  },
+  "bin": {
+    "thc-grc-client": "bin/thc.grc.client.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThriveCoin/thc-grc-client-cli-js.git"
+  },
+  "author": {
+    "name": "vigan.abd",
+    "email": "vigan.abd@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ThriveCoin/thc-grc-client-cli-js/issues"
+  },
+  "homepage": "https://github.com/ThriveCoin/thc-grc-client-cli-js#readme",
+  "dependencies": {
+    "@thrivecoin/grc-client": "git+https://github.com/ThriveCoin/thc-grc-client-js.git",
+    "yargs": "^17.4.1"
+  },
+  "devDependencies": {
+    "standard": "^16.0.4"
+  }
+}
