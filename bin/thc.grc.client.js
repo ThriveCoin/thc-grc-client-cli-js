@@ -5,7 +5,7 @@
 process.argv[1] = 'thc-grc-client' // fix usage name in yargs
 
 const _ = require('lodash')
-const { GrcHttpClient } = require('@thrivecoin/grc-client')
+const { GrcHttpClient, GrcWsClient } = require('@thrivecoin/grc-client')
 const { cmds, yargs } = require('./yargs')
 
 const main = async () => {
@@ -13,11 +13,13 @@ const main = async () => {
   const [cmd] = argv._
   if (!cmds.includes(cmd)) throw new Error('ERR_CMD_NOT_SUPPORTED')
 
-  const client = new GrcHttpClient({ grape: argv.grape, timeout: argv.timeout })
-  client.start()
+  const httpClient = new GrcHttpClient({ grape: argv.grape, timeout: argv.timeout })
+  httpClient.start()
+  const wsClient = new GrcWsClient({ grape: argv.grape, timeout: argv.timeout })
+  wsClient.start()
 
   if (cmd === 'lookup') {
-    const res = await new Promise((resolve, reject) => client._link.lookup(
+    const res = await new Promise((resolve, reject) => httpClient._link.lookup(
       argv.service, {}, (err, res) => err ? reject(err) : resolve(res)
     ))
     console.log(res)
@@ -30,11 +32,13 @@ const main = async () => {
     const payload = JSON.parse(argv.payload)
     if (!Array.isArray(payload)) throw new Error('ERR_PAYLOAD_PARAM_INVALID')
 
+    const client = argv.transport === 'http' ? httpClient : wsClient
     const res = await client.request(argv.service, argv.action, payload)
     console.log(res)
   }
 
-  client.stop()
+  httpClient.stop()
+  wsClient.stop()
 }
 
 main().catch((err) => {

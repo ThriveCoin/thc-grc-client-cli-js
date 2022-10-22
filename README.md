@@ -49,14 +49,15 @@ thc-grc-client request
 makes a request to the service
 
 Options:
-  -g, --grape    grape dht url
+  -g, --grape      grape dht url
                          [string] [required] [default: "http://127.0.0.1:30001"]
-  -t, --timeout  grape timeout [ms]         [number] [required] [default: 30000]
-      --version  Show version number                                   [boolean]
-      --help     Show help                                             [boolean]
+  -t, --timeout    grape timeout [ms]       [number] [required] [default: 30000]
+      --version    Show version number                                 [boolean]
+      --help       Show help                                           [boolean]
   -s, --service                                              [string] [required]
   -a, --action                                               [string] [required]
   -p, --payload                                              [string] [required]
+      --transport           [required] [choices: "http", "ws"] [default: "http"]
 
 example:
 thc-grc-client request -g http://10.0.0.5:30001 -s rest:util:net -a getIpInfo \
