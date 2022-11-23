@@ -7,6 +7,11 @@ process.argv[1] = 'thc-grc-client' // fix usage name in yargs
 const _ = require('lodash')
 const { GrcHttpClient, GrcWsClient } = require('@thrivecoin/grc-client')
 const { cmds, yargs } = require('./yargs')
+const { inspect } = require('util')
+
+const printRes = (res) => {
+  console.log(inspect(res, false, 1000, true))
+}
 
 const main = async () => {
   const argv = yargs.argv
@@ -22,7 +27,7 @@ const main = async () => {
     const res = await new Promise((resolve, reject) => httpClient._link.lookup(
       argv.service, {}, (err, res) => err ? reject(err) : resolve(res)
     ))
-    console.log(res)
+    printRes(res)
   }
 
   if (cmd === 'request') {
@@ -34,7 +39,7 @@ const main = async () => {
 
     const client = argv.transport === 'http' ? httpClient : wsClient
     const res = await client.request(argv.service, argv.action, payload)
-    console.log(res)
+    printRes(res)
   }
 
   httpClient.stop()
