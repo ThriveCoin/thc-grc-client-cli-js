@@ -18,11 +18,19 @@ const yargs = require('yargs')
       .option('payload', { alias: 'p', type: 'string', demandOption: true })
       .option('transport', { default: 'http', choices: ['http', 'ws'], demandOption: true })
   )
+  .command(
+    'server',
+    'creates mockup service',
+    (y) => y.option('service', { alias: 's', type: 'string', demandOption: true })
+      .option('http-port', { alias: 'h', type: 'number', demandOption: false })
+      .option('ws-port', { alias: 'w', type: 'number', demandOption: false })
+      .options('defs', { alias: 'd', type: 'string', demandOption: true, desc: 'path to json file or json strcture defining actions and results, e.g. \'[{"a":"getData","r":{"foo":"bar"}},{"a":"isValid","r":true}]\'' })
+  )
   .demandCommand()
   .recommendCommands()
   .version(pkg.version)
   .help()
 
-const cmds = ['lookup', 'request']
+const cmds = ['lookup', 'request', 'server']
 
 module.exports = { cmds, yargs }

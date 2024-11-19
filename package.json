@@ -1,6 +1,6 @@
 {
   "name": "@thrivecoin/grc-client-cli",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Grenache cli client",
   "main": "index.js",
   "scripts": {
@@ -26,6 +26,7 @@
   "homepage": "https://github.com/ThriveCoin/thc-grc-client-cli-js#readme",
   "dependencies": {
     "@thrivecoin/grc-client": "git+https://github.com/ThriveCoin/thc-grc-client-js.git",
+    "@thrivecoin/grc-server": "git+https://github.com/ThriveCoin/thc-grc-server-js.git",
     "yargs": "^17.4.1"
   },
   "devDependencies": {
