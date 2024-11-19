@@ -90,7 +90,7 @@ const main = async () => {
         defs.forEach(d => {
           this[d.a] = (...params) => {
             console.log('request action', d.a)
-            console.log('request params', params)
+            console.log('request params', JSON.stringify(params))
             console.log('request result', d.r)
             console.log('----------')
             return d.r
