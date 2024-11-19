@@ -88,7 +88,13 @@ const main = async () => {
         super(args)
 
         defs.forEach(d => {
-          this[d.a] = () => d.r
+          this[d.a] = (...params) => {
+            console.log('request action', d.a)
+            console.log('request params', params)
+            console.log('request result', d.r)
+            console.log('----------')
+            return d.r
+          }
         })
       }
     }(constructorArgs)
