@@ -11,6 +11,7 @@ const { GrcHttpClient, GrcWsClient } = require('@thrivecoin/grc-client')
 const { GrcHttpWrk, GrcWsWrk, GrcHttpWsWrk } = require('@thrivecoin/grc-server')
 const { cmds, yargs } = require('./yargs')
 const { inspect } = require('util')
+const { writeFileSync } = require('fs')
 
 const printRes = (res) => {
   console.log(inspect(res, false, 1000, true))
@@ -42,7 +43,11 @@ const main = async () => {
 
     const client = argv.transport === 'http' ? httpClient : wsClient
     const res = await client.request(argv.service, argv.action, payload)
-    printRes(res)
+    if(argv.out !== 'console'){
+      writeFileSync(argv.out, res)
+    } else {
+      printRes(res)
+    }
   }
 
   if (cmd === 'server') {
